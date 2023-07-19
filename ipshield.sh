@@ -7,7 +7,7 @@ readonly opendbl_url="https://opendbl.net/lists/"
 readonly opendbl_files=("etknown.list" "tor-exit.list" "bruteforce.list" "blocklistde-all.list" "talos.list" "dshield.list" "sslblock.list")
 
 readonly ipdeny_url="https://www.ipdeny.com/ipblocks/data/countries/"
-readonly ipdeny_files=("cn.zone" "ru.zone")
+readonly ipdeny_files=("cn.zone" "ru.zone" "tr.zone" "br.zone" "in.zone" "np.zone" "ro.zone" "af.zone") # china | russia | turkey | brazil | india | nepal | romania | afghanistan
 
 #####################################################################################
 # Error handling
@@ -100,6 +100,7 @@ function main
 
     timestamp=$(date)
     echo "$timestamp: Blacklist update complete!" >> "$log_file"
+    echo "--------------------------------------------------------------------" >> "$log_file"
 }
 
     main "$@"
