@@ -83,7 +83,7 @@ function load_blacklist()
     fi
 
     total=$(cat /opt/ipshield/black.list | wc -l)           # count number of entries
-    echo "Loaded $total IPs"                                # Print total number of IPs loaded   
+    echo "Loaded $total IPs" >> "$log_file"                 # Print total number of IPs loaded  
 }
 
 #####################################################################################
