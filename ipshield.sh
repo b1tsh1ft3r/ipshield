@@ -67,20 +67,9 @@ function load_blacklist()
 {
     echo "Loading blacklist..." >> "$log_file"
 
-    if iptables -nvL | grep -q "match-set blacklist"; then
-        iptables -D INPUT -m set --match-set blacklist src -j DROP
-        sleep 2
-    fi
-
-    ipset destroy blacklist                                 # remove any existing blacklist
-    ipset -N blacklist iphash                               # create a blank blacklist
+    ipset flush blacklist
     sleep 2
     ipset restore < /opt/ipshield/black.list >> "$log_file" # load the black.list file
-
-    # Check if the rule exists in the INPUT chain of iptables
-    if ! iptables -C INPUT -m set --match-set blacklist src -j DROP &>/dev/null; then
-        iptables -I INPUT 1 -m set --match-set blacklist src -j DROP
-    fi
 
     total=$(cat /opt/ipshield/black.list | wc -l)           # count number of entries
     echo "Loaded $total IPs" >> "$log_file"                 # Print total number of IPs loaded  
